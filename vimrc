@@ -52,6 +52,8 @@ map <F8> :echo synIDattr(synID(line("."),col("."),1),"name")<cr>
 set listchars=tab:>✖,trail:✖
 set list
 
+set nu
+
 " https://github.com/Lokaltog/vim-powerline
 set nocompatible " disable vi-compatibility
 set laststatus=2 " always show the statusline
@@ -81,9 +83,5 @@ set vb
 
 " vimroom
 let g:vimroom_width=150
-
-set listchars=tab:>✖,trail:✖
-set list
-set nu
 
 au BufRead,BufNewFile *.logcat set filetype=logcat
