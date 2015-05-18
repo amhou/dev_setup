@@ -1,18 +1,22 @@
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" Let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" My bundles
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'logcat'
-Bundle 'jQuery'
-Bundle 'rails.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'vim-scripts/VimClojure'
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'L9'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim'
+Plugin 'sickill/vim-monokai'
+Plugin 'airblade/vim-gitgutter'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 syntax on
 filetype indent plugin on
@@ -25,63 +29,32 @@ set shiftwidth=4
 set ruler
 set hlsearch
 set go-=T
+set ic
 
-let mapleader = ","
-map <leader>t :FufFile <CR>
-map <leader>w :FufRenewCache <CR>
-map <leader>b :FufBuffer <CR>
+"Ruby settings
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+autocmd FileType erb setlocal shiftwidth=2 tabstop=2
 
-imap <C-a> <Esc>0i
-imap <C-e> <Esc>$a
+"Ctrl-P settings
+let g:ctrlp_map =",t"
+set mouse=a
+if &term =~ "xterm" || &term =~ "screen"
+    autocmd VimEnter * set ttymouse=xterm2
+    autocmd FocusGained * set ttymouse=xterm2
+    autocmd BufEnter * set ttymouse=xterm2
+endif
 
-autocmd BufNewFile,BufRead *.prawn set filetype=ruby
-autocmd BufNewFile,BufRead *.jsp set filetype=html
-autocmd BufNewFile,BufRead *.ppj set filetype=java
-autocmd FileType ruby,eruby,yaml,haml set sw=2 sts=2
-set hid " hide abandon buffers in order to not lose undo history
+map <C-n> :NERDTreeToggle<CR>
 
-nnoremap <F3> :set invpaste paste?<CR>
-set pastetoggle=<F3>
-set showmode
+"Git Gutter settings
+nmap gh <Plug>GitGutterNextHunk
+nmap gH <Plug>GitGutterPrevHunk
 
-" map f8 to show the syntax coloring for a character
-map <F8> :echo synIDattr(synID(line("."),col("."),1),"name")<cr>
-
-" part of ~/.vimrc
-" highlight tabs and trailing spaces
 set listchars=tab:>✖,trail:✖
 set list
 
 set nu
 
-" https://github.com/Lokaltog/vim-powerline
-set nocompatible " disable vi-compatibility
-set laststatus=2 " always show the statusline
-
-" highlight anything longer than 120 chars
-" match ErrorMsg '\%>120v.\+'
-set colorcolumn=121
-hi ColorColumn ctermbg=lightgrey
-
-" highlight line
-"set cul
-
-" set cursorline
-" set cursorcolumn
-set term=xterm-256color
-" let g:solarized_termcolors=256
-set t_Co=256
-let g:solarized_termcolors=&t_Co
-set background=dark
-colorscheme solarized
-highlight CursorColumn guibg=#404040
-
-set backspace=indent,eol,start
-
-" visual beep, so that there's no annoying beep
-set vb
-
-" vimroom
-let g:vimroom_width=150
-
-au BufRead,BufNewFile *.logcat set filetype=logcat
+"Set a different background color past 120 characters
+let &colorcolumn=join(range(121,999),",")
+highlight ColorColumn ctermbg=DarkGray
