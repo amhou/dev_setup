@@ -1,6 +1,8 @@
 # PATH VARIABLES
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/Users/ahou/Library/Android/sdk/platform-tools:$PATH"
 
 # ALIAS
 alias grep="grep --color=auto"
@@ -13,12 +15,17 @@ alias sed="gsed"
 alias dongers="echo ヽ༼ຈل͜ຈ༽ﾉ"
 alias brake="bundle exec rake"
 alias be="bundle exec"
+alias tmux='tmux -2'
 #alias ctags="/usr/local/bin/ctags"
 #alias gcc="/usr/local/bin/gcc-4.8"
+alias dc='docker-compose'
 
 # COLOR SETTINGS
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
+
+export EDITOR='vim'
+export SHELL='/bin/bash'
 
 # FUNCTIONS
 function mkcd() {
@@ -26,6 +33,7 @@ function mkcd() {
 }
 
 # GIT SETTINGS
+alias gitvim="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 source /usr/local/etc/bash_completion
 
 #  Customize BASH PS1 prompt to show current GIT repository and branch.
